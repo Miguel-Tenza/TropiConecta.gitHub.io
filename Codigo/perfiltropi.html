@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - TropiConecta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #004d40;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            border-radius: 10px;
+            margin: auto;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        .cover {
+            width: 100%;
+            height: 120px;
+            background-color: #00796b;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #004d40;
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .back-button:hover {
+            background: #002d26;
+        }
+        .upload-button {
+            position: absolute;
+            bottom: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .upload-input {
+            display: none;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -50px;
+            flex-direction: column;
+        }
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+            background-color: white;
+        }
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .stats {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 10px;
+        }
+        .actions {
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .button {
+            background-color: #004d40;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
+        }
+        .button:hover {
+            background-color: #002d26;
+        }
+        .button.gray {
+            background-color: #e4e6eb;
+            color: black;
+        }
+        .button img {
+            width: 12px;
+            height: 12px;
+        }
+        .new-post {
+            margin: 15px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .new-post input, .new-post button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .new-post button {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            width: auto;
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            .button {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+            .new-post input, .new-post button {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cover">
+            <button class="back-button" onclick="window.history.back()">&#8592;</button>
+            <img id="cover-image" src="" alt="Horario">
+            <button class="upload-button" onclick="document.getElementById('upload-input').click()">Subir horario</button>
+            <input type="file" id="upload-input" class="upload-input" accept="image/*" onchange="loadCoverImage(event)">
+        </div>
+
+        <div class="profile-info">
+            <img class="profile-pic" src="https://via.placeholder.com/80" alt="Perfil">
+            <div class="name">Miguel Tenza</div>
+        </div>
+
+        <div class="stats">3.1 mil seguidores • 2.2 mil seguidos</div>
+
+        <div class="actions">
+            <button class="button">Panel profesional</button>
+            <button class="button gray">
+                <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="+"> Agregar a historia
+            </button>
+        </div>
+
+        <div class="new-post">
+            <input type="text" placeholder="¿Qué estás pensando?">
+            <input type="file" accept="image/*,video/*">
+            <button class="button">Publicar</button>
+        </div>
+    </div>
+
+    <script>
+        function loadCoverImage(event) {
+            var image = document.getElementById('cover-image');
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    image.style.display = "block";
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
